@@ -8,7 +8,26 @@ rm cloudera-cdh-5-0.x86_64.rpm
 
 # Install and setup hadoop/yarn
 sudo yum install -y hadoop-conf-pseudo
-sudo yum install -y java-1.7.0-openjdk-devel
+
+if [[ -a /vagrant/artifacts/jdk-7u72-linux-x64.tar.gz ]]; then
+    cp /vagrant/artifacts/jdk-7u72-linux-x64.tar.gz /opt/jdk-7u72-linux-x64.tar.gz
+else
+    wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-x64.tar.gz"
+fi
+
+tar -zxvf *.tar.gz*
+
+mkdir -p /usr/lib/jvm
+ln -s /opt/jdk1.7.0_72 /usr/lib/jvm/default-java
+
+alternatives --install /usr/bin/java java /usr/lib/jvm/default-java/bin/java 2
+alternatives --install /usr/bin/jar jar /usr/lib/jvm/default-java/bin/jar 2
+alternatives --install /usr/bin/javac javac /usr/lib/jvm/default-java/bin/javac 2
+alternatives --set jar /usr/lib/jvm/default-java/bin/jar
+alternatives --set javac /usr/lib/jvm/default-java/bin/javac
+
+cp /vagrant/artifacts/java-profile.sh /etc/profile.d/java.sh
+
 sudo -u hdfs hdfs namenode -format
 for x in `cd /etc/init.d ; ls hadoop-hdfs-*` ; do sudo service $x start ; done
 sudo -u hdfs hadoop fs -mkdir -p /tmp/hadoop-yarn/staging/history/done_intermediate
