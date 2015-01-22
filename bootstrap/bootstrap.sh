@@ -19,7 +19,7 @@ tar -zxvf *.tar.gz*
 
 mkdir -p /usr/lib/jvm
 mv /tmp/jdk1.7.0_72 /usr/lib/jvm
-ln -s /usr/lib/jdk1.7.0_72 /usr/lib/jvm/default-java
+ln -s /usr/lib/jvm/jdk1.7.0_72 /usr/lib/jvm/default-java
 
 alternatives --install /usr/bin/java java /usr/lib/jvm/default-java/bin/java 2
 alternatives --install /usr/bin/jar jar /usr/lib/jvm/default-java/bin/jar 2
