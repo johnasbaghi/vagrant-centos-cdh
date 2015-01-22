@@ -10,7 +10,7 @@ rm cloudera-cdh-5-0.x86_64.rpm
 sudo yum install -y hadoop-conf-pseudo
 
 if [[ -a /vagrant/artifacts/jdk-7u72-linux-x64.tar.gz ]]; then
-    cp /vagrant/artifacts/jdk-7u72-linux-x64.tar.gz /opt/jdk-7u72-linux-x64.tar.gz
+    cp /vagrant/artifacts/jdk-7u72-linux-x64.tar.gz /tmp/jdk-7u72-linux-x64.tar.gz
 else
     wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u72-b14/jdk-7u72-linux-x64.tar.gz"
 fi
