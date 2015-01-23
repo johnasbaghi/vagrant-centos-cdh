@@ -1,4 +1,8 @@
 set -e
+
+mkdir -p /srv/software
+chmod 777 /srv/software
+
 # Install cloudera repo 
 cd /tmp
 wget http://archive.cloudera.com/cdh5/one-click-install/redhat/6/x86_64/cloudera-cdh-5-0.x86_64.rpm
