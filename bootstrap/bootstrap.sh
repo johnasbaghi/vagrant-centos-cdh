@@ -55,14 +55,53 @@ chkconfig iptables off
 echo "set bell-style none" > /home/vagrant/.inputrc
 sudo chown vagrant:vagrant /home/vagrant/.inputrc
 
-# Set java_home
-echo "export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk.x86_64" >> /home/vagrant/.bashrc
-
 # Install Maven for java development
-wget http://www.mirrorservice.org/sites/ftp.apache.org/maven/maven-3/3.0.5/binaries/apache-maven-3.0.5-bin.tar.gz
-cd /usr/local
-sudo tar xvf /tmp/apache-maven-3.0.5-bin.tar.gz
-sudo rm /tmp/apache-maven-3.0.5-bin.tar.gz
-sudo ln -s apache-maven-3.0.5/ maven
-echo "export M2_HOME=/usr/local/maven" >> /home/vagrant/.bashrc
-echo "export PATH=\$M2_HOME/bin:\${PATH}" >> /home/vagrant/.bashrc
+wget http://apache.mesi.com.ar/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.tar.gz
+
+sudo tar -zxvf apache-maven-3.2.5-bin.tar.gz
+sudo mv apache-maven-3.2.5 /usr/lib
+sudo rm /tmp/apache-maven-3.2.5-bin.tar.gz
+sudo mv apache-maven-3.2.5 /usr/lib/
+sudo ln -s /usr/lib/apache-maven-3.2.5/ /usr/lib/maven
+
+cp /vagrant/artifacts/maven-profile.sh /etc/profile.d/maven.sh
+
+# Gradle
+wget http://services.gradle.org/distributions/gradle-2.2.1-bin.zip
+sudo unzip gradle-2.2.1-bin.zip
+sudo mv gradle-2.2.1 /usr/lib
+sudo ln -s /usr/lib/gradle-2.2.1 /usr/lib/gradle
+
+cp /vagrant/artifacts/gradle-profile.sh /etc/profile.d/gradle.sh
+
+
+
+# Spark
+sudo wget http://d3kbcqa49mib13.cloudfront.net/spark-1.2.0-bin-hadoop2.3.tgz
+tar -zxvf spark-1.2.0-bin-hadoop2.3.tgz
+
+mv spark-1.2.0-bin-hadoop2.3 /usr/lib/
+
+ln -s /usr/lib/spark-1.2.0-bin-hadoop2.3 /usr/lib/spark
+
+cp /vagrant/artifacts/spark-env.sh /usr/lib/spark/conf/
+
+sudo chown vagrant:vagrant -R /usr/lib/spark-1.2.0-bin-hadoop2.3
+
+mkdir -p /var/log/spark
+chmod 777 /var/log/spark
+
+/usr/lib/spark/sbin/start-master.sh
+
+
+yum -y install git
+
+
+#giraph
+
+wget http://www.trieuvan.com/apache/giraph/giraph-1.1.0/giraph-dist-1.1.0-hadoop2-bin.tar.gz
+tar -zxvf giraph-dist-1.1.0-hadoop2-bin.tar.gz
+mv giraph-1.1.0-hadoop2-for-hadoop-2.5.1 /srv/software
+ln -s /srv/software/giraph-1.1.0-hadoop2-for-hadoop-2.5.1 /srv/software/giraph
+
+sudo chown vagrant:vagrant -R /srv/software/giraph-1.1.0-hadoop2-for-hadoop-2.5.1
