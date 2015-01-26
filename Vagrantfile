@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provider :virtualbox do |vb|
-      vb.name = "vagrant-sentos-cdh"
+      vb.name = "vagrant-centos-cdh"
   end
   
 end
