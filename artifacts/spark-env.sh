@@ -49,5 +49,6 @@
 # - SPARK_IDENT_STRING  A string representing this instance of spark. (Default: $USER)
 # - SPARK_NICENESS      The scheduling priority for daemons. (Default: 0)
 
-
+export SPARK_WORKER_INSTANCES=4
+export HADOOP_CONF_DIR=/etc/hadoop/conf
 export SPARK_LOG_DIR=/var/log/spark

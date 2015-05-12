@@ -1,4 +1,4 @@
-### Vagrant CentOS VM 
+### Vagrant CentOS VM for SEAM Team 6
 
 - JDK 7
 - CDH 5.3
@@ -6,3 +6,5 @@
 - Gradle
 - Spark
 - Giraph
+- IGraph
+
