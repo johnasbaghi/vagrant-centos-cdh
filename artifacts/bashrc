@@ -6,5 +6,11 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific aliases and functions
-
 PATH=$PATH:/usr/local/bin
+export SCALA_HOME=/opt/scala
+PATH=$PATH:$SCALA_HOME/bin
+export SPARK_HOME=/opt/spark
+PATH=$PATH:$SPARK_HOME/bin
+
+export PYTHONPATH="$SPARK_HOME/python/:$PYTHONPATH"
+export PYTHONPATH="$SPARK_HOME/python/lib/py4j-0.8.2.1-src.zip:$PYTHONPATH"
